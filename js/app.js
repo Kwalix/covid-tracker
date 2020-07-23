@@ -1,44 +1,40 @@
-/*
-$('chLine').ajax({
-    type: "GET",
-    url: "https://covid2019-api.herokuapp.com/v2/current",
-    data: "data",
-    dataType: "dataType",
-    success: (res) => {
-    }
-});
-*/
-let chartData = {
-    labels: ["Confirmed", "Deaths", "Recovered", "Active"],
-    datasets: [{
-      data: [1234, 6571, 3654, 9853],
-    }]
-  };
-  
-let chLine = document.getElementById('chLine');
-if (chLine) {
-    new Chart(chLine, {
-    type: 'horizontalBar',
-    data: chartData,
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: false
+$.get("https://covid2019-api.herokuapp.com/v2/total", (data, status) => {
+  if (status == "success") {
+
+    let chartData = {
+      labels: ["Confirmed", "Deaths", "Recovered", "Active"],
+      datasets: [{
+        data: [data.data.confirmed, data.data.deaths, data.data.recovered, data.data.active],
+      }]
+    };
+
+    const chartBar = document.getElementById('chartBar');
+    if (chartBar) {
+      new Chart(chartBar, {
+        type: 'horizontalBar',
+        data: chartData,
+        options: {
+          scales: {
+            xAxes: [{
+              ticks: {
+                beginAtZero: false
+              }
+            }]
+          },
+          legend: {
+            display: false
           }
-        }]
-      },
-      legend: {
-        display: true
-      }
+        }
+      });
     }
-    });
+
   } else {
-    let noConexion = () => {
-        let coAlert = $('<div></div>').addClass("alert alert-danger block").text(' Error while requesting data');
-        let alertIcon = $('<i></i>').addClass("fa fa-bug")
-        $('#chrt').prepend(coAlert);
-        $('.alert').prepend(alertIcon);
-      }
-      noConexion();
+    const noConexion = () => {
+      const coAlert = $('<div></div>').addClass("alert alert-danger block").text(' Error while requesting data');
+      const alertIcon = $('<i></i>').addClass("fa fa-bug")
+      $('#chrt').prepend(coAlert);
+      $('.alert').prepend(alertIcon);
+    }
+    noConexion();
   }
+});
