@@ -18,7 +18,7 @@ let chartData = {
 let chLine = document.getElementById('chLine');
 if (chLine) {
     new Chart(chLine, {
-    type: 'line',
+    type: 'horizontalBar',
     data: chartData,
     options: {
       scales: {
@@ -29,7 +29,7 @@ if (chLine) {
         }]
       },
       legend: {
-        display: false
+        display: true
       }
     }
     });
