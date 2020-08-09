@@ -14,7 +14,7 @@
   <title>Covid Tracker</title>
 </head>
 
-<body>
+<body onorientationchange="orientationChecker()">
   <header>
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
       <a class="navbar-brand" href="#">
@@ -28,7 +28,19 @@
     </nav>
   </header>
   <div id="main" class="container">
-    <h2 class="text-center">Total covid-19 statistic</h2>
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center">Total covid-19 statistic</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div id="screenOrientNotify" class="alert alert-info" role="alert">
+          <i class="fas fa-info-circle"></i>
+          For better reading, orient your device in landscape mode
+        </div>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <div style="margin: 50px;" class="card">
@@ -53,6 +65,14 @@
   <script>
     let report = () => {
       window.location.href = "mailto:lyk4n@protonmail.com";
+    } // Bug report mail
+    
+    let orientationChecker = () => {
+      if (window.screen.orientation === 'landscape-primary' || widowows.screen.orientation === 'landscape-secondary') {
+        $('#screenOrientNotify').hide();
+      } else {
+        $('#screenOrientNotify').show();
+      }
     }
   </script>
 </body>
