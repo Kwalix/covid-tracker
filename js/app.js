@@ -5,6 +5,12 @@ $.get("https://covid2019-api.herokuapp.com/v2/total", (data, status) => {
       labels: ["Confirmed", "Deaths", "Recovered", "Active"],
       datasets: [{
         data: [data.data.confirmed, data.data.deaths, data.data.recovered, data.data.active],
+        backgroundColor: [
+          'rgba(226, 91, 0, 1)',
+          'rgba(255, 0, 0, 1)',
+          'rgba(41, 140, 255, 1)',
+          'rgba(0, 58, 255, 1)'
+      ],
       }]
     };
 
