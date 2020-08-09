@@ -1,10 +1,10 @@
-$.get("https://covid2019-api.herokuapp.com/v2/total", (data, status) => {
-  if (status == "success") {
-
+$.ajax({
+  url: "https://covid2019-api.herokuapp.com/v2/total",
+  success: (res) => {
     let chartData = {
       labels: ["Confirmed", "Deaths", "Recovered", "Active"],
       datasets: [{
-        data: [data.data.confirmed, data.data.deaths, data.data.recovered, data.data.active],
+        data: [res.data.confirmed, res.data.deaths, res.data.recovered, res.data.active],
         backgroundColor: [
           'rgba(226, 91, 0, 1)',
           'rgba(255, 0, 0, 1)',
@@ -33,10 +33,10 @@ $.get("https://covid2019-api.herokuapp.com/v2/total", (data, status) => {
         }
       });
     }
-
-  } else {
+  },
+  error: (xhr) => {
     const noConexion = () => {
-      const coAlert = $('<div></div>').addClass("alert alert-danger block").text(' Error while requesting data');
+      const coAlert = $('<div></div>').addClass("alert alert-danger block").text(' Error while requesting data' + " ( " + xhr.status + " : " + xhr.statusText + " ) ");
       const alertIcon = $('<i></i>').addClass("fa fa-bug")
       $('#chrt').prepend(coAlert);
       $('.alert').prepend(alertIcon);
